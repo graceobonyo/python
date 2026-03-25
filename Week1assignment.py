@@ -1,66 +1,64 @@
+
 # QUIZ GAME
-
-questions = "What is the capital city of Kenya?"
-"How may prime ministers has Kenya had?"
-"What is the sport Kenya is worldwide known for?"
-"Kenya has how many counties?"
-
 
 def welcome_to(game):
     print(f"Welcome to {game}!")
-welcome_to("know your country")
+welcome_to("Know Your Country")
+
+def choose(instructions):
+    print(f"Choose {instructions}!")
+choose("one correct answer only")
 
 
-answer = 'B'
-
-while True:
-    guess = str(input("What is the capital city of kenya?... A.Cairo B.Nairobi C.London D.BurkinaFaso\n"))
-    if guess == '':
-        print('Please enter an answer to proceed with the game')
-        continue
-    if guess == answer :
-        print('Woohoo!Welcome to the next step')
-        break
-    print('Nice attempt! Please try again')
-
-
-my_answer = 'D'
-
-while True:
-    guess = str(input("How many prime ministers has kenya had?.... A.8 B.9 C.3 D.2 \n"))
-    if guess == '':
-        print('Please enter an answer to proceed with the game')
-        continue
-    if guess == my_answer :
-        print('Woohoo!Welcome to the next step')
-        break
-    print('it is okay')
-        
+questions = [
+    {
+        "question": "When did Kenya gain independence?",
+        "choices": {"A": "1895", "B": "1920", "C": "1963", "D": "1964"},
+        "answer": "C"
+    },
+    {
+        "question": "How many prime ministers has Kenya had?",
+        "choices": {"A": "8", "B": "9", "C": "3", "D": "2"},
+        "answer": "D"
+    },
+    {
+        "question": "What sport is Kenya worldwide known for?",
+        "choices": {"A": "Athletics", "B": "Cricket", "C": "Ice Hockey", "D": "Ballet"},
+        "answer": "A"
+    },
+    {
+        "question": "Kenya has how many counties?",
+        "choices": {"A": "47", "B": "83", "C": "64", "D": "39"},
+        "answer": "A"
+    },
+]
 
 
-choice = 'A'
-while True:
-    guess = str(input("What is the sport kenya is worldwide known for?....A.Athletics B.Cricket C.Ice Hockey D.Ballet\n"))
-    if guess == '':
-        print("Haiyaaa!Fill in your answer")
-        continue
-    if guess == choice:
-        print("Good job !one more question to go")
-        break
-    print("You can do this!Try again")
+score = 0  #  score starts at 0
+total = len(questions)
 
+for q in questions:
+    print("\n" + q["question"])
+    for option, text in q["choices"].items():
+        print(f"  {option}. {text}")
 
-my_choice = 'A'
+    while True:
+        user_answer = input("Your answer: ").strip().upper()
+        if user_answer in ["A", "B", "C", "D"]:
+            break
+        else:
+            print("Invalid input. Please enter A, B, C, or D.")
 
-while True:
-    guess = str(input("Kenya has how many counties?..... A.47 B.83 C.64 D.39\n"))
-    if guess == '':
-        print("Please insert a valid character")
-        continue
-    if guess == my_choice:
-        print("Congratulations!You know your country")
-        break
-    print("Please try again...")
+    if user_answer == q["answer"]:
+        print(" Correct!\n")
+        score += 1       #  Add score properly
+    else:
+        print(f"Wrong! The correct answer was {q['answer']}.\n")
 
+print("QUIZ COMPLETE!")
+print(f"Your final score: {score} / {total}")
 
-
+if score == total:
+    print("Excellent! Perfect score!")
+elif score >= total * 0.6:
+    print("Good")
